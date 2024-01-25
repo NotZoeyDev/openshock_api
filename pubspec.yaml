@@ -1,0 +1,23 @@
+name: openshock_api
+description: An API wrapper for OpenShock.
+version: 1.0.0
+
+environment:
+  sdk: ^3.2.5
+
+dependencies:
+  cookie_jar: ^4.0.8
+  dio: ^5.4.0
+  dio_cookie_manager: ^3.1.1
+  dio_smart_retry: ^6.0.0
+  freezed_annotation: ^2.4.1
+  intl: ^0.19.0
+  jiffy: ^6.2.2
+  json_annotation: ^4.8.1
+  logger: ^2.0.2+1
+
+dev_dependencies:
+  build_runner: ^2.4.8
+  freezed: ^2.4.6
+  json_serializable: ^6.7.1
+  lints: ^3.0.0
