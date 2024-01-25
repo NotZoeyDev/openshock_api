@@ -7,7 +7,7 @@ void main() async {
   await client.account.login(email: '', password: '');
 
   // Get your user's info and print your name
- final SelfResponse info = await client.users.self();
+  final SelfResponse info = await client.users.self();
   print(info.name);
 
   // Fetch your devices and print their names
