@@ -24,9 +24,16 @@ void main() async {
     });
   }
 
+  // Create a new device
+  final GuidBaseResponse createdDevice = await client.devices.create();
+  final DeviceResponseWithToken device = await client.devices.get(createdDevice.data);
+
+  // Rename it
+  await client.devices.update(device.id, name: 'Fat hub');
+
   // Create a new shocker, edit it and then delete it
   final GuidBaseResponse createdShocker = await client.shockers.create(
-    Shocker(rfId: 0, device: devices.first.id, model: ShockerModelType.caixianlin),
+    Shocker(rfId: 0, device: device.id, model: ShockerModelType.caixianlin),
   );
 
   final ShockerWithDevice shocker = await client.shockers.get(createdShocker.data);
