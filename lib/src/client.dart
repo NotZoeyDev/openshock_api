@@ -33,6 +33,7 @@ class OpenShock {
   
   /// Base URL for the api
   late String _baseUrl;
+  String get baseUrl => _baseUrl;
 
   /// Dio instance used for requests
   late Dio _client;
