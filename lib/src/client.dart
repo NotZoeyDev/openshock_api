@@ -25,7 +25,9 @@ class OpenShock {
     _client = Dio();
 
     // Add cookie support
-    _client.interceptors.add(CookieManager(CookieJar()));
+    final CookieJar jar = CookieJar();
+    _jar = jar;
+    _client.interceptors.add(CookieManager(_jar));
 
     _client.options.baseUrl = _baseUrl;
     _client.options.validateStatus = (_) => true;
@@ -57,6 +59,14 @@ class OpenShock {
   /// Dio instance used for requests
   late Dio _client;
   Dio get client => _client;
+
+  /// Access to the [CookieJar]
+  late CookieJar _jar;
+  
+  /// Clear all the cookies in the [CookieManager]
+  Future<void> clearCookies() async {
+    await _jar.deleteAll();
+  }
 
   /// Access to [Account]
   late Account _account;
