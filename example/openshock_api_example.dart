@@ -7,7 +7,7 @@ void main() async {
   await client.account.login(email: '', password: '');
   
   // OR by setting up a token
-  client.setToken('vk4nsEJkRCZ9tk7im0ggkJgsv4dB13ugjM7wrDazNzpvfJsYU4rxWk5ChIrJoqYv');
+  client.setToken('');
 
   // Get your user's info and print your name
   final SelfResponse info = await client.users.self();
