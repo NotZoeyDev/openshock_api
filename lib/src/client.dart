@@ -6,9 +6,9 @@ import 'package:openshock_api/openshock_api.dart';
 typedef OpenShockResponse = Map<String, dynamic>;
 
 class OpenShock {
-  OpenShock({ String baseUrl = 'https://api.shocklink.net', PersistCookieJar? cookieJar }) {
+  OpenShock({ String baseUrl = 'https://api.shocklink.net' }) {
     _baseUrl = baseUrl;
-    createClient(cookieJar);
+    createClient();
 
     _account = Account(this);
     _devices = Devices(this);
@@ -21,19 +21,38 @@ class OpenShock {
   }
 
   /// Create our Dio instance/client
-  void createClient(PersistCookieJar? persistCookieJar) {
+  void createClient() {
     _client = Dio();
 
     // Add cookie support
-    _client.interceptors.add(CookieManager(persistCookieJar ?? CookieJar()));
+    _client.interceptors.add(CookieManager(CookieJar()));
 
     _client.options.baseUrl = _baseUrl;
     _client.options.validateStatus = (_) => true;
+
+    // Add the token to the header if it's set
+    _client.interceptors.add(InterceptorsWrapper(
+      onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
+        if (_token != null && _token!.isNotEmpty) {
+          options.headers['OpenShockToken'] = _token;
+        }
+
+        return handler.next(options);
+      },
+    ),);
   }
   
   /// Base URL for the api
   late String _baseUrl;
   String get baseUrl => _baseUrl;
+
+  /// User token used for api endpoints
+  String? _token;
+
+  /// Set the token
+  void setToken(String? token) {
+    _token = token;
+  }
 
   /// Dio instance used for requests
   late Dio _client;
