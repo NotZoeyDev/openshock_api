@@ -33,7 +33,7 @@ Map<String, dynamic> _$TokenResponseToJson(TokenResponse instance) =>
     };
 
 const _$PermissionTypeEnumMap = {
-  PermissionType.shockersUser: 'shockersUser',
+  PermissionType.shockersUser: 'Shockers_Use',
 };
 
 TokenResponseBaseResponse _$TokenResponseBaseResponseFromJson(
