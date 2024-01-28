@@ -43,6 +43,7 @@ enum PauseReason {
   final String reason;
 }
 
+@JsonEnum(valueField: 'type')
 enum PermissionType {
   shockersUser('Shockers_Use');
 
